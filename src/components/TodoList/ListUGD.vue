@@ -1,6 +1,6 @@
 <template>
     <v-main class="list">
-        <h3 class="text-h3 font-weight-medium mb-5">To Do List</h3>
+        <h3 class="text-h3 font-weight-medium mb-5">To Do List UGD</h3>
 
         <v-card>
             <v-card-title primary-title>
@@ -14,7 +14,19 @@
                 <v-btn color="success" dark @click="dialog = true">Tambah</v-btn>
             </v-card-title>
             
-            <v-data-table :headers="headers" :items="filterPriority" :search="search" pagination.sync="pagination">
+            <v-data-table :headers="headers" :items="filterPriority" :search="search" pagination.sync="pagination">   
+                <template v-slot:[`item.priority`]="{ item }">
+                    <v-card v-if="item.priority == 'Penting'" style="border-color:lightcoral; color:red; width:fit-content;" outlined>
+                        {{ item.priority}}
+                    </v-card>
+                    <v-card v-else-if="item.priority == 'Biasa'" style="border-color:lightblue; color:blue; width:fit-content;" outlined>
+                        {{ item.priority}}
+                    </v-card>
+                    <v-card v-else-if="item.priority == 'Tidak Penting'" style="border-color:lightgreen; color:green; width:fit-content;" outlined>
+                        {{ item.priority}}
+                    </v-card>
+                </template>
+
                 <template v-slot:[`item.actions`]="{ item }">
                     <v-btn small @click="editItem(item)">
                     edit
@@ -49,7 +61,6 @@
                             label="All Priority"
                             required
                         ></v-select>
-
                         <v-textarea
                         v-model="formTodo.note" label="Note" required>
                         </v-textarea>
