@@ -49,16 +49,6 @@
                             label="All Priority"
                             required
                         ></v-select>
-                        <v-chip
-                            v-if="Penting"
-                            class="ma-2"
-                            close
-                            color="red"
-                            label
-                            outlined
-                            @click:close="Penting = false"
-                        > Penting
-                        </v-chip>
 
                         <v-textarea
                         v-model="formTodo.note" label="Note" required>
